@@ -1,5 +1,7 @@
 'use client'
 
+import styles from './Button.module.css'
+
 interface Props {
     children: string;
     color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'link';
@@ -9,7 +11,7 @@ interface Props {
 const Button = ({children, onClick, color = 'primary'} : Props) => {
   return (
     <button 
-        className={'btn btn-' + color}
+        className={[styles.btn, styles['btn-' + color]].join(' ')}
         onClick={onClick}
         >
       {children}
@@ -17,4 +19,4 @@ const Button = ({children, onClick, color = 'primary'} : Props) => {
   )
 }
 
-export default Button
+export default Button;

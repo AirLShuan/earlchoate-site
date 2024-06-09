@@ -1,7 +1,22 @@
 'use client'
 
 import { useState } from "react";
+import styled from 'styled-components';
 
+
+const List = styled.ul`
+    list-style: none;
+    padding: 0;
+`;
+
+interface ListItemProps {
+    active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+    padding: 5px 0;
+    background: ${props => props.active ? 'blue' : 'none'};
+`;
 interface Props {
     items: string[];
     heading: string;
@@ -17,10 +32,10 @@ export default function ListGroup({items, heading, onSelectItem}: Props) {
         <>
             <h1>{heading}</h1>
             { message }
-            <ul className="list-group"> 
+            <List> 
                 {items.map((item, index) => (
-                    <li 
-                        className={ selectedIndex === index ? 'list-group-item active' : 'list-group-item'}
+                    <ListItem
+                        active={index === selectedIndex}
                         key={item}
                         onClick={() => {
                             setSelectedIndex(index);
@@ -28,9 +43,9 @@ export default function ListGroup({items, heading, onSelectItem}: Props) {
                         }}
                         >
                             {item}
-                    </li>
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         </>
     );
 }
