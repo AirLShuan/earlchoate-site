@@ -7,18 +7,33 @@ import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import categories from "./expense-tracker/categories";
 
-interface User {
-  id: number;
-  name: string;
+interface Pokemon {
+  game_indices: [
+    {
+      game_index: number,
+      version : {
+        name: string, 
+        url: string
+      }
+    }
+  ];
+  
+  species: {
+    name: string, 
+    url: string
+  };
 }
 
 export default function Page() {
-  const [users, setUsers] = useState<User []>([]);
+  const [pokemon, setPokemon] = useState({});
   const [error, setError] = useState('');
   useEffect(() => {
     axios
-      .get<User[]>('https://jsonplaceholder.typicode.com/users')
-      .then(res => setUsers(res.data))
+      .get('https://pokeapi.co/api/v2/pokemon/wooper')
+      .then((res) => {
+        setPokemon(res.data),
+        console.log(res.data)
+      })
       .catch(err => setError(err.message));
 
   }, [])
@@ -27,8 +42,9 @@ export default function Page() {
     <>
       {error && <p className='text-danger'>{error}</p>}
       <ul>
-        {users.map(user => <li key={user.id}>{user.name}</li>)}
+       
       </ul>
     </>
   );
+  // <li key={pokemon.game_indices[5].game_index}>{pokemon.species.name}</li>
 }
