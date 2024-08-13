@@ -38,13 +38,13 @@ export default function Page() {
 
   }, [])
 
-  console.log("Pokemon:")
-  console.log(pokemon)
+  console.log(pokemon);
   return (
     <>
       {error && <p className='text-danger'>{error}</p>}
+      <p>{pokemon.name}</p>
       <ul>
-        <li key={pokemon.game_indices[5].game_index}>{pokemon.species.name}</li>
+        <li></li>
       </ul>
     </>
   );
